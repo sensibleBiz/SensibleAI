@@ -1,0 +1,666 @@
+/* ==========================================================================
+   Global dark theme – covers Tailwind utilities, Ant Design, app CSS,
+   page-specific styles, and common inline light backgrounds/text colors.
+   ========================================================================== */
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark,
+html.dark body,
+html.dark #root {
+  background: #141414 !important;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Layout shell ------------------------------------------------------- */
+
+html.dark .ant-layout,
+html.dark .ant-layout-content,
+html.dark .ant-layout-sider-children,
+html.dark .app-main,
+html.dark .app-content,
+html.dark .app-shell,
+html.dark .leads-dashboard-canvas,
+html.dark .leads-page-content,
+html.dark .warehouse-dashboard {
+  background: #141414 !important;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Tailwind light backgrounds ----------------------------------------- */
+
+html.dark .bg-white,
+html.dark .bg-white\/95,
+html.dark .bg-white\/90,
+html.dark .bg-white\/80,
+html.dark .bg-white\/70,
+html.dark .bg-white\/10,
+html.dark .bg-white\/5,
+html.dark .\!bg-white {
+  background-color: #1f1f1f !important;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/80,
+html.dark .bg-slate-50\/70,
+html.dark .bg-slate-100,
+html.dark .bg-slate-200,
+html.dark .bg-gray-50,
+html.dark .bg-gray-100,
+html.dark .bg-gray-200,
+html.dark .bg-neutral-50,
+html.dark .bg-neutral-100,
+html.dark .bg-zinc-50,
+html.dark .bg-zinc-100,
+html.dark .bg-stone-50,
+html.dark .bg-stone-100,
+html.dark .\!bg-slate-50,
+html.dark .from-slate-50,
+html.dark .to-slate-50,
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-50\/80:hover,
+html.dark .hover\:bg-gray-50:hover,
+html.dark .hover\:bg-white:hover,
+html.dark .hover\:\!bg-slate-50:hover,
+html.dark .hover\:\!bg-yellow-100:hover {
+  background-color: #1a1a1a !important;
+}
+
+html.dark .bg-yellow-50,
+html.dark .hover\:bg-yellow-50:hover,
+html.dark .bg-yellow-100 {
+  background-color: #3f2e05 !important;
+}
+
+html.dark .bg-red-50,
+html.dark .bg-red-50\/80,
+html.dark .bg-red-950\/50,
+html.dark .bg-red-100 {
+  background-color: #3f1214 !important;
+}
+
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-100,
+html.dark .hover\:bg-emerald-100:hover {
+  background-color: #052e16 !important;
+}
+
+html.dark .bg-blue-50,
+html.dark .bg-blue-100,
+html.dark .hover\:bg-blue-100:hover {
+  background-color: #0c2744 !important;
+}
+
+html.dark .bg-rose-50,
+html.dark .bg-rose-100 {
+  background-color: #3f1214 !important;
+}
+
+html.dark .bg-amber-50,
+html.dark .bg-amber-100 {
+  background-color: #3f2e05 !important;
+}
+
+html.dark .bg-violet-50,
+html.dark .bg-purple-50,
+html.dark .bg-indigo-50,
+html.dark .bg-cyan-50,
+html.dark .bg-teal-50,
+html.dark .bg-orange-50,
+html.dark .bg-lime-50,
+html.dark .bg-fuchsia-50,
+html.dark .bg-pink-50 {
+  background-color: #1f1f1f !important;
+}
+
+/* Arbitrary Tailwind background colors used across the app */
+html.dark .bg-\[\#f5f8fc\],
+html.dark .bg-\[\#f8fafc\],
+html.dark .bg-\[\#f4f8fb\],
+html.dark .bg-\[\#f0f2f5\],
+html.dark .bg-\[\#efeae2\],
+html.dark .bg-\[\#e9edef\],
+html.dark .bg-\[\#f5f6f6\],
+html.dark .bg-\[\#f1f3f4\],
+html.dark .bg-\[\#f8fafd\],
+html.dark .bg-\[\#e8f0fe\] {
+  background-color: #1a1a1a !important;
+}
+
+html.dark .hover\:bg-\[\#f5f6f6\]:hover {
+  background-color: #262626 !important;
+}
+
+/* ---- Tailwind text colors ----------------------------------------------- */
+
+html.dark .text-slate-950,
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-700,
+html.dark .text-neutral-900,
+html.dark .text-neutral-800,
+html.dark .text-neutral-700,
+html.dark .text-\[\#202124\],
+html.dark .text-\[\#0a3750\],
+html.dark .text-\[\#182033\],
+html.dark .text-\[\#121a2b\],
+html.dark .text-\[\#263e55\],
+html.dark .text-\[\#102f4c\],
+html.dark .text-\[\#1a1a1a\] {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+html.dark .text-slate-600,
+html.dark .text-slate-500,
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-neutral-600,
+html.dark .text-neutral-500,
+html.dark .text-\[\#66758a\],
+html.dark .text-\[\#637083\],
+html.dark .text-\[\#607089\],
+html.dark .text-\[\#758294\],
+html.dark .text-\[\#6d7a8b\] {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+html.dark .text-slate-400,
+html.dark .text-gray-400,
+html.dark .text-neutral-400 {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+html.dark .text-slate-300,
+html.dark .text-slate-200,
+html.dark .text-slate-100,
+html.dark .text-gray-300 {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+html.dark .text-emerald-700,
+html.dark .text-emerald-600 {
+  color: #4ade80 !important;
+}
+
+html.dark .text-rose-700,
+html.dark .text-rose-600 {
+  color: #fb7185 !important;
+}
+
+html.dark .text-amber-700,
+html.dark .text-amber-600 {
+  color: #fbbf24 !important;
+}
+
+html.dark .text-blue-700,
+html.dark .text-blue-600 {
+  color: #60a5fa !important;
+}
+
+html.dark .text-red-700,
+html.dark .text-red-600 {
+  color: #f87171 !important;
+}
+
+html.dark .text-green-700,
+html.dark .text-green-600 {
+  color: #4ade80 !important;
+}
+
+html.dark .text-violet-700,
+html.dark .text-violet-600,
+html.dark .text-purple-700,
+html.dark .text-purple-600 {
+  color: #c4b5fd !important;
+}
+
+html.dark .placeholder\:text-slate-400::placeholder,
+html.dark .placeholder\:text-gray-400::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* ---- Borders & dividers ------------------------------------------------- */
+
+html.dark .border-slate-50,
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-300,
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300,
+html.dark .border-neutral-200,
+html.dark .border-\[\#dadce0\],
+html.dark .border-\[\#d9e2ef\],
+html.dark .border-\[\#e6edf6\],
+html.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-slate-200\/70 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #303030 !important;
+}
+
+html.dark .border-red-200,
+html.dark .border-red-300,
+html.dark .border-emerald-200,
+html.dark .border-emerald-300,
+html.dark .border-blue-200,
+html.dark .border-blue-300,
+html.dark .border-amber-200,
+html.dark .border-rose-200 {
+  border-color: #404040 !important;
+}
+
+html.dark .ring-slate-100,
+html.dark .ring-slate-200,
+html.dark .ring-inset {
+  --tw-ring-color: #303030;
+}
+
+html.dark .shadow-sm,
+html.dark .shadow,
+html.dark .shadow-md,
+html.dark .shadow-lg {
+  --tw-shadow-color: rgb(0 0 0 / 0.45);
+}
+
+/* ---- Common inline light backgrounds (React style objects) -------------- */
+
+html.dark [style*="background: #f8fafc"],
+html.dark [style*="background:#f8fafc"],
+html.dark [style*='background: "#f8fafc"'],
+html.dark [style*="background: '#f8fafc'"],
+html.dark [style*="background: #f5f8fc"],
+html.dark [style*="background: #f5f5f5"],
+html.dark [style*="background: #fafafa"],
+html.dark [style*="background: #fbfcfe"],
+html.dark [style*="background: #f1f4f8"],
+html.dark [style*="background: #f0f2f5"],
+html.dark [style*="background: white"],
+html.dark [style*="backgroundColor: #f8fafc"],
+html.dark [style*="backgroundColor: #fafafa"] {
+  background: #141414 !important;
+  background-color: #141414 !important;
+}
+
+html.dark [style*='background: "#fff"'],
+html.dark [style*="background: '#fff'"],
+html.dark [style*="background: #fff"],
+html.dark [style*="background:#fff"],
+html.dark [style*='background: "#ffffff"'],
+html.dark [style*="backgroundColor: #fff"],
+html.dark [style*="backgroundColor:#fff"],
+html.dark [style*='backgroundColor: "#fff"'] {
+  background: #1f1f1f !important;
+  background-color: #1f1f1f !important;
+}
+
+/* Inline dark text on light panels */
+html.dark [style*="color: #262626"],
+html.dark [style*="color: #1a1a1a"],
+html.dark [style*="color: #333"],
+html.dark [style*="color: #666"],
+html.dark [style*="color: #4b5563"],
+html.dark [style*="color: #555"],
+html.dark [style*='color: "#262626"'],
+html.dark [style*='color: "#1a1a1a"'] {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Preserve intentional white text on colored buttons/headers */
+html.dark [style*="color: #fff"],
+html.dark [style*="color:#fff"],
+html.dark [style*='color: "#fff"'],
+html.dark [style*="color: white"],
+html.dark .text-white,
+html.dark .\!text-white {
+  color: #fff !important;
+}
+
+/* ---- Ant Design components ---------------------------------------------- */
+
+html.dark .ant-card,
+html.dark .ant-card-head,
+html.dark .ant-table,
+html.dark .ant-table-wrapper,
+html.dark .ant-table-container,
+html.dark .ant-table-content,
+html.dark .ant-empty,
+html.dark .ant-modal-content,
+html.dark .ant-modal-header,
+html.dark .ant-drawer-content,
+html.dark .ant-drawer-header,
+html.dark .ant-dropdown-menu,
+html.dark .ant-select-dropdown,
+html.dark .ant-picker-dropdown,
+html.dark .ant-picker-panel,
+html.dark .ant-input,
+html.dark .ant-input-affix-wrapper,
+html.dark .ant-input-outlined,
+html.dark .ant-input-number,
+html.dark .ant-select-selector,
+html.dark .ant-picker,
+html.dark .ant-segmented,
+html.dark .ant-list,
+html.dark .ant-descriptions,
+html.dark .ant-collapse,
+html.dark .ant-collapse-header,
+html.dark .ant-collapse-content,
+html.dark .ant-tabs-tab,
+html.dark .ant-menu,
+html.dark .ant-menu-sub,
+html.dark .ant-popover-inner,
+html.dark .ant-tooltip-inner,
+html.dark .ant-notification-notice,
+html.dark .ant-message-notice-content,
+html.dark .ant-statistic,
+html.dark .ant-timeline-item-content,
+html.dark .ant-upload-drag,
+html.dark .ant-result,
+html.dark .ant-steps-item-container {
+  background-color: #1f1f1f;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .ant-card-bordered,
+html.dark .ant-modal-content,
+html.dark .ant-drawer-content,
+html.dark .ant-input,
+html.dark .ant-input-affix-wrapper,
+html.dark .ant-select-selector,
+html.dark .ant-picker {
+  border-color: #303030 !important;
+}
+
+html.dark .ant-table-thead > tr > th {
+  background-color: #1a1a1a !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  border-color: #303030 !important;
+}
+
+html.dark .ant-table-tbody > tr > td {
+  border-color: #303030 !important;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .ant-table-tbody > tr.ant-table-row:hover > td,
+html.dark .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #262626 !important;
+}
+
+html.dark .ant-table-tbody > tr.ant-table-placeholder:hover > td {
+  background: #1f1f1f !important;
+}
+
+html.dark .ant-typography,
+html.dark .ant-card-head-title,
+html.dark .ant-card-body,
+html.dark .ant-statistic-title,
+html.dark .ant-statistic-content,
+html.dark .ant-empty-description,
+html.dark .ant-form-item-label > label,
+html.dark .ant-descriptions-item-label,
+html.dark .ant-descriptions-item-content,
+html.dark .ant-list-item-meta-title,
+html.dark .ant-list-item-meta-description,
+html.dark .ant-modal-title,
+html.dark .ant-drawer-title,
+html.dark .ant-tabs-tab-btn,
+html.dark .ant-collapse-header-text {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+html.dark .ant-typography-secondary,
+html.dark .ant-form-item-extra,
+html.dark .ant-form-item-explain,
+html.dark .ant-statistic-content-suffix,
+html.dark .ant-select-selection-placeholder,
+html.dark .ant-picker-input > input[disabled] {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+html.dark .ant-input::placeholder,
+html.dark .ant-input-affix-wrapper input::placeholder,
+html.dark textarea.ant-input::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+html.dark .ant-segmented-item-selected {
+  background: #303030 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.dark .ant-segmented-item-label {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+html.dark .ant-dropdown-menu-item,
+html.dark .ant-select-item {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+html.dark .ant-dropdown-menu-item:hover,
+html.dark .ant-select-item-option-active {
+  background: #262626 !important;
+}
+
+html.dark .ant-alert {
+  border-color: #404040;
+}
+
+html.dark .ant-alert-info {
+  background: #111d2c;
+}
+
+html.dark .ant-alert-success {
+  background: #162312;
+}
+
+html.dark .ant-alert-warning {
+  background: #2b2111;
+}
+
+html.dark .ant-alert-error {
+  background: #2a1215;
+}
+
+html.dark .ant-tag {
+  border-color: #404040;
+}
+
+html.dark .ant-divider {
+  border-color: #303030 !important;
+}
+
+html.dark .ant-layout-sider-trigger {
+  background: #141414 !important;
+  border-color: #303030 !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* ---- Custom HTML tables (non-Ant) --------------------------------------- */
+
+html.dark table thead tr,
+html.dark table tbody tr.hover\:bg-slate-50:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark table thead tr.bg-slate-50,
+html.dark table tr.border-b.border-slate-200.bg-slate-50,
+html.dark table tr.text-xs.font-semibold.uppercase.text-slate-500 {
+  background-color: #1a1a1a !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+html.dark table tbody tr.hover\:bg-slate-50:hover,
+html.dark table tbody tr.border-b.border-slate-100:hover {
+  background-color: #262626 !important;
+}
+
+/* ---- AI Scrap page ------------------------------------------------------ */
+
+html.dark .ai-scrap-page {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .ai-scrap-config,
+html.dark .ai-scrap-run-panel,
+html.dark .ai-scrap-dataset-section,
+html.dark .ai-scrap-table-panel,
+html.dark .ai-scrap-log-panel,
+html.dark .ai-scrap-topbar,
+html.dark .ai-scrap-table-wrap,
+html.dark .ai-scrap-keyword-chip,
+html.dark .ai-scrap-dataset-card {
+  background: #1f1f1f !important;
+  border-color: #303030 !important;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .ai-scrap-brand strong,
+html.dark .ai-scrap-section-title,
+html.dark .ai-scrap-table-title,
+html.dark .ai-scrap-run-copy strong,
+html.dark .ai-scrap-dataset-card strong {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.dark .ai-scrap-brand span,
+html.dark .ai-scrap-kicker,
+html.dark .ai-scrap-muted,
+html.dark .ai-scrap-table-subtitle,
+html.dark .ai-scrap-run-copy span {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+html.dark .ai-scrap-table th,
+html.dark .ai-scrap-table td {
+  border-color: #303030 !important;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .ai-scrap-table thead th {
+  background: #1a1a1a !important;
+}
+
+html.dark .ai-scrap-table tbody tr:hover {
+  background: #262626 !important;
+}
+
+/* ---- App-level components from App.css ---------------------------------- */
+
+html.dark .app-header {
+  background: #131b2e !important;
+  border-bottom: 1px solid #1e293b !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+html.dark .app-header-search > div > div {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+html.dark .app-header-search input {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+html.dark .app-header-search input::placeholder {
+  color: rgba(255, 255, 255, 0.32) !important;
+}
+
+html.dark .app-header-search > div > div[style*="1677ff"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .app-header-search {
+  --search-bg: rgba(255, 255, 255, 0.06);
+  --search-border: rgba(255, 255, 255, 0.14);
+  --search-dropdown-bg: #1e293b;
+}
+
+html.dark .app-theme-toggle {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+html.dark .app-theme-toggle:hover {
+  background: #1f1f1f !important;
+  color: #69b1ff !important;
+}
+
+html.dark .app-user-trigger:hover {
+  background: #1f1f1f;
+}
+
+html.dark .app-profile-role {
+  background: #262626;
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+html.dark .app-profile-meta-row {
+  background: #262626;
+}
+
+html.dark .responsive-filter-card,
+html.dark .responsive-page-header {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Lead cards & page specific */
+html.dark .lead-card,
+html.dark .leads-page-header {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .attendance-summary-panel,
+html.dark .attendance-summary-item {
+  background: #1f1f1f !important;
+  border-color: #303030 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ---- WhatsApp chat (dark variant, keeps brand green) -------------------- */
+
+html.dark .bg-\[\#008069\] {
+  background-color: #005c4b !important;
+}
+
+html.dark .bg-\[\#d9fdd3\] {
+  background-color: #005c4b !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ---- Preserve login / public signup as light UI ------------------------- */
+
+html.dark .login-page,
+html.dark .login-page .login-card,
+html.dark .login-page .login-qr-code,
+html.dark .login-page .login-method-switch button.active,
+html.dark .outlet-signup-page,
+html.dark .outlet-signup-page .outlet-signup-card {
+  background: initial;
+  background-color: initial;
+  color: initial;
+}
+
+html.dark .login-page {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(227, 30, 36, 0.11), transparent 28%),
+    radial-gradient(circle at 90% 88%, rgba(15, 46, 80, 0.1), transparent 30%),
+    linear-gradient(145deg, #f8fafc 0%, #f5f1f1 52%, #eef3f8 100%) !important;
+  color: #102f4c;
+}
+
+html.dark .login-page .login-card {
+  background: #fff !important;
+}
+
+html.dark .login-page .login-panel-intro h1,
+html.dark .login-page .login-panel-intro p,
+html.dark .login-page .login-field label,
+html.dark .login-page .login-steps h2,
+html.dark .login-page .login-steps p {
+  color: inherit !important;
+}

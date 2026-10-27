@@ -1,0 +1,124 @@
+name: Backend Cloud Run Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-cloud-run-deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: backend-cloud-run-production
+  cancel-in-progress: false
+
+env:
+  GCP_PROJECT_ID: sensiblecrm
+  GCP_REGION: asia-south1
+  CLOUD_RUN_SERVICE: sensible-crm-api
+  NODE_VERSION: 24.13.0
+
+jobs:
+  deploy-backend:
+    name: Test, Build & Deploy Backend
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Verify Node environment
+        run: |
+          node --version
+          npm --version
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci --legacy-peer-deps
+
+      - name: Run backend tests
+        working-directory: backend
+        run: npm test
+
+      - name: Build backend
+        working-directory: backend
+        run: npm run build
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy backend to Cloud Run
+        run: |
+          gcloud run deploy "$CLOUD_RUN_SERVICE" \
+            --source ./backend \
+            --project "$GCP_PROJECT_ID" \
+            --region "$GCP_REGION" \
+            --platform managed \
+            --allow-unauthenticated \
+            --quiet
+
+      - name: Get Cloud Run URL
+        id: cloud-run
+        run: |
+          SERVICE_URL=$(gcloud run services describe "$CLOUD_RUN_SERVICE" \
+            --project "$GCP_PROJECT_ID" \
+            --region "$GCP_REGION" \
+            --format="value(status.url)")
+
+          echo "SERVICE_URL=$SERVICE_URL" >> "$GITHUB_ENV"
+          echo "$SERVICE_URL"
+
+      - name: Health check
+        run: |
+          echo "Checking: $SERVICE_URL"
+
+          for i in {1..10}; do
+            HTTP_STATUS=$(curl \
+              --silent \
+              --output /dev/null \
+              --write-out "%{http_code}" \
+              --max-time 15 \
+              "$SERVICE_URL/api/v1/health" || true)
+
+            echo "Attempt $i: HTTP $HTTP_STATUS"
+
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "Backend health check passed."
+              exit 0
+            fi
+
+            sleep 5
+          done
+
+          echo "Backend health check failed."
+          exit 1
+
+      - name: Deployment summary
+        run: |
+          echo "=========================================="
+          echo "Backend deployment successful"
+          echo "=========================================="
+          echo "Service : $CLOUD_RUN_SERVICE"
+          echo "Region  : $GCP_REGION"
+          echo "Project : $GCP_PROJECT_ID"
+          echo "URL     : $SERVICE_URL"
+          echo "=========================================="

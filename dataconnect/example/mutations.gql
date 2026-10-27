@@ -1,0 +1,41 @@
+mutation CreateCustomer(
+  $tenantId: UUID!
+  $businessId: UUID!
+  $customerCode: String!
+  $customerName: String!
+  $normalizedCustomerName: String!
+  $createdBy: UUID!
+) @auth(level: NO_ACCESS) {
+  customer_insert(
+    data: {
+      tenantId: $tenantId
+      businessId: $businessId
+      customerCode: $customerCode
+      customerName: $customerName
+      normalizedCustomerName: $normalizedCustomerName
+      createdBy: $createdBy
+      updatedBy: $createdBy
+    }
+  )
+}
+
+mutation UpdateCustomerName(
+  $id: UUID!
+  $customerName: String!
+  $normalizedCustomerName: String!
+  $updatedBy: UUID!
+) @auth(level: NO_ACCESS) {
+  customer_update(
+    id: $id
+    data: {
+      customerName: $customerName
+      normalizedCustomerName: $normalizedCustomerName
+      updatedBy: $updatedBy
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
+mutation DeleteCustomer($id: UUID!) @auth(level: NO_ACCESS) {
+  customer_delete(id: $id)
+}

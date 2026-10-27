@@ -1,0 +1,46 @@
+query GetCustomer($id: UUID!) @auth(level: NO_ACCESS) {
+  customer(id: $id) {
+    id
+    tenantId
+    businessId
+    customerCode
+    customerName
+    businessName
+    mobile
+    email
+    area
+    city
+    state
+    status
+    lifecycle
+    totalEnquiries
+    totalWon
+    totalLost
+    createdAt
+    updatedAt
+  }
+}
+
+query ListCustomers(
+  $tenantId: UUID!
+  $limit: Int = 50
+  $offset: Int = 0
+) @auth(level: NO_ACCESS) {
+  customers(
+    where: { tenantId: { eq: $tenantId } }
+    orderBy: [{ updatedAt: DESC }]
+    limit: $limit
+    offset: $offset
+  ) {
+    id
+    customerCode
+    customerName
+    businessName
+    mobile
+    email
+    city
+    status
+    lifecycle
+    updatedAt
+  }
+}

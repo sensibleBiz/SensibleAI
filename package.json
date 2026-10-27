@@ -1,0 +1,84 @@
+{
+  "name": "Sensible CRM",
+  "private": true,
+  "version": "1.5.9",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev:local",
+    "dev:local": "concurrently --kill-others --names WEB,API --prefix-colors cyan,magenta \"npm:dev:web\" \"npm:dev:api\"",
+    "dev:web": "vite",
+    "dev:api": "npm --prefix backend run dev",
+    "typecheck": "tsc -b --pretty false",
+    "build": "tsc -b && vite build",
+    "deploy:aicrm": "npm run build && firebase deploy --only hosting:pro-aicrm",
+    "deploy:exports": "npm run build && firebase deploy --only hosting:pro-exports",
+    "deploy:accounts": "npm run build && firebase deploy --only hosting:pro-accounts",
+    "deploy:all": "npm run build && firebase deploy --only hosting",
+    "lint": "eslint .",
+    "test": "node --experimental-transform-types --test tests/*.test.mjs",
+    "test:expense-budget-ui": "node --test tests/expense-budget-ui.test.mjs",
+    "test:event-registration-date": "node --test tests/event-registration-date.test.mjs",
+    "test:event-member-persistence": "node --test tests/event-member-persistence.test.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/plots": "^2.6.8",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@aws-sdk/client-ses": "^3.1148.0",
+    "@fontsource/montserrat": "^5.3.0",
+    "@react-google-maps/api": "^2.20.8",
+    "@reduxjs/toolkit": "^2.12.0",
+    "@tailwindcss/vite": "^4.3.1",
+    "antd": "^5.29.3",
+    "chart.js": "^4.5.1",
+    "dayjs": "^1.11.21",
+    "exceljs": "4.4.0",
+    "file-saver": "^2.0.5",
+    "firebase": "^12.15.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
+    "lucide-react": "^0.552.0",
+    "react": "^19.2.7",
+    "react-confetti": "^6.4.0",
+    "react-dom": "^19.2.7",
+    "react-icons": "^5.6.0",
+    "react-redux": "^9.3.0",
+    "react-router-dom": "7.18.1",
+    "react-use": "^17.6.1",
+    "recharts": "^3.9.0",
+    "redux-persist": "^6.0.0",
+    "uuid": "^13.0.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-redux": "^7.1.34",
+    "@vitejs/plugin-react": "^5.2.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^16.5.0",
+    "tailwindcss": "^4.3.1",
+    "ts-prune": "^0.10.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.62.0",
+    "vite": "^7.3.6",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "overrides": {
+    "minimatch@3.1.5": {
+      "brace-expansion": "1.1.18"
+    },
+    "exceljs": {
+      "archiver": "8.0.0",
+      "unzipper": "0.12.5",
+      "uuid": "11.1.1"
+    },
+    "react-router-dom": {
+      "react-router": "8.3.0"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+# Google Workflows: Quotation-to-Payment Saga
+# Orchestrates Quote Generation -> PhonePe Link -> WhatsApp Delivery -> 48h Expiry/Callback -> Zoho Invoice
+
+main:
+  params: [args]
+  steps:
+    - initSaga:
+        assign:
+          - quoteId: ${args.quoteId}
+          - customerPhone: ${args.customerPhone}
+          - customerName: ${args.customerName}
+          - amountInr: ${args.amountInr}
+          - outletId: ${args.outletId}
+          - apiBaseUrl: ${sys.get_env("CRM_API_BASE_URL")}
+
+    # Step 1: Generate PhonePe dynamic payment link via Core API
+    - generatePaymentLink:
+        call: http.post
+        args:
+          url: ${apiBaseUrl + "/api/v1/billing/topup"}
+          headers:
+            Content-Type: "application/json"
+            X-Workflow-Caller: "google-workflows"
+          body:
+            outletId: ${outletId}
+            amountInr: ${amountInr}
+            idempotencyKey: ${"saga-" + quoteId}
+        result: paymentLinkResponse
+
+    # Step 2: Send Interactive WhatsApp button with Payment Link
+    - sendWhatsAppPaymentPrompt:
+        call: http.post
+        args:
+          url: ${apiBaseUrl + "/api/v1/whatsapp/chats/send-template"}
+          headers:
+            Content-Type: "application/json"
+          body:
+            to: ${customerPhone}
+            templateName: "quote_payment_link_v1"
+            parameters:
+              - ${customerName}
+              - ${amountInr}
+              - ${paymentLinkResponse.body.data.redirectUrl}
+        result: waResponse
+
+    # Step 3: Wait for Payment or 48-hour timeout
+    # In Google Workflows, callback endpoints suspend execution until webhook is fired or timeout expires
+    - createCallbackWait:
+        call: events.create_callback_endpoint
+        args:
+          http_callback_method: "POST"
+        result: callbackDetails
+
+    # Step 4: Branch on payment outcome
+    - checkPaymentOutcome:
+        switch:
+          - condition: ${callbackDetails.received == true}
+            next: handlePaymentSuccess
+        next: handlePaymentTimeout
+
+    # Step 5A: On Payment Success -> Trigger Invoice & Receipt
+    - handlePaymentSuccess:
+        call: http.post
+        args:
+          url: ${apiBaseUrl + "/api/v1/quotations/" + quoteId + "/mark-paid"}
+          body:
+            paymentRef: ${callbackDetails.payload.paymentRef}
+        return: "SAGA_COMPLETED_PAID"
+
+    # Step 5B: On Timeout -> Send WhatsApp Reminder
+    - handlePaymentTimeout:
+        call: http.post
+        args:
+          url: ${apiBaseUrl + "/api/v1/whatsapp/chats/send-template"}
+          body:
+            to: ${customerPhone}
+            templateName: "quote_payment_reminder_v1"
+            parameters:
+              - ${customerName}
+              - ${quoteId}
+        return: "SAGA_PAYMENT_EXPIRED_REMINDER_SENT"

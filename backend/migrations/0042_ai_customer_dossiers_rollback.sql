@@ -1,0 +1,15 @@
+DROP FUNCTION IF EXISTS crm.record_ai_customer_dossier_feedback(uuid, uuid, text, uuid, boolean, text);
+DROP TRIGGER IF EXISTS customer_outlets_ai_dossier_stale ON crm.customer_outlets;
+DROP TRIGGER IF EXISTS customers_ai_dossier_stale ON crm.customers;
+DROP TRIGGER IF EXISTS leads_ai_dossier_delete ON crm.leads;
+DROP TRIGGER IF EXISTS leads_ai_dossier_stale ON crm.leads;
+DROP TRIGGER IF EXISTS timeline_ai_dossier_stale ON crm.timeline_events;
+DROP FUNCTION IF EXISTS crm.stale_ai_dossier_from_customer_outlet();
+DROP FUNCTION IF EXISTS crm.stale_ai_dossier_from_customer();
+DROP FUNCTION IF EXISTS crm.stale_ai_dossier_from_lead();
+DROP FUNCTION IF EXISTS crm.stale_ai_dossier_from_timeline();
+DROP FUNCTION IF EXISTS crm.mark_ai_customer_dossier_stale(uuid, uuid, text, uuid);
+DROP FUNCTION IF EXISTS crm.request_ai_customer_dossier(uuid, uuid, text, uuid);
+DROP TABLE IF EXISTS crm.ai_dossier_feedback;
+DROP TABLE IF EXISTS crm.ai_dossier_usage_daily;
+DROP TABLE IF EXISTS crm.ai_customer_dossiers;

@@ -1,0 +1,23 @@
+{
+  "projects": {
+    "default": "sensiblecrm",
+    "backend": "sensiblecrm",
+    "hosting": "sensiblebizpro"
+  },
+  "targets": {
+    "sensiblebizpro": {
+      "hosting": {
+        "pro-aicrm": [
+          "pro-aicrm"
+        ],
+        "pro-exports": [
+          "pro-exports"
+        ],
+        "pro-accounts": [
+          "pro-accounts-c3399"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

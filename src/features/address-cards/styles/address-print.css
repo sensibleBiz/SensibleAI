@@ -1,0 +1,299 @@
+.address-preview-viewport {
+  overflow-x: auto;
+  border: 1px solid #dbe3ef;
+  border-radius: 16px;
+  background:
+    linear-gradient(45deg, #edf1f6 25%, transparent 25%),
+    linear-gradient(-45deg, #edf1f6 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #edf1f6 75%),
+    linear-gradient(-45deg, transparent 75%, #edf1f6 75%);
+  background-color: #f7f9fc;
+  background-position:
+    0 0,
+    0 8px,
+    8px -8px,
+    -8px 0;
+  background-size: 16px 16px;
+  padding: 24px;
+}
+
+.address-print-root {
+  width: max-content;
+  margin: 0 auto;
+}
+
+.a4-address-page {
+  display: grid;
+  box-sizing: border-box;
+  width: 210mm;
+  height: 297mm;
+  padding: 10mm;
+  margin: 0 auto 24px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+  grid-template-columns: repeat(2, 92mm);
+  grid-template-rows: repeat(5, 52mm);
+  column-gap: 5mm;
+  row-gap: 5mm;
+}
+
+.a4-address-page:last-child {
+  margin-bottom: 0;
+}
+
+.address-print-card-shell {
+  position: relative;
+  box-sizing: border-box;
+  width: 92mm;
+  height: 52mm;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.address-print-card {
+  display: flex;
+  width: 92mm;
+  height: 52mm;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: var(--address-card-padding, 5mm);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  background: #fff;
+  color: #000;
+  font-family: Calibri, Carlito, Arial, sans-serif;
+  font-weight: 400;
+  text-align: left;
+  white-space: normal;
+}
+
+.address-print-card--bordered {
+  border: 0.4pt solid #d1d5db;
+  border-radius: 3mm;
+}
+
+.address-card-actions {
+  position: absolute;
+  top: 1.5mm;
+  right: 1.5mm;
+  z-index: 3;
+  display: flex;
+  gap: 1mm;
+}
+
+.address-card-action {
+  display: inline-flex;
+  width: 6mm;
+  height: 6mm;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dbe3ef;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.address-card-action svg {
+  width: 3mm;
+  height: 3mm;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.address-card-action:hover {
+  transform: translateY(-1px);
+}
+
+.address-card-action:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+.address-card-action--edit {
+  color: #1d4ed8;
+}
+
+.address-card-action--edit:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.address-card-action--delete {
+  color: #dc2626;
+}
+
+.address-card-action--delete:hover {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.address-card-title,
+.address-card-company,
+.address-card-address,
+.address-card-metadata,
+.address-card-phone {
+  margin: 0;
+}
+
+.address-card-title {
+  color: #c62828;
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: var(--address-card-title-size, 8pt);
+  font-weight: 600;
+  line-height: var(--address-card-title-line-height, 10pt);
+  text-transform: uppercase;
+}
+
+.address-card-company {
+  display: -webkit-box;
+  margin-top: 1.5mm;
+  overflow: hidden;
+  color: #000;
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: var(--address-card-company-size, 11pt);
+  font-weight: 700;
+  line-height: var(--address-card-company-line-height, 13pt);
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.address-card-address {
+  display: -webkit-box;
+  margin-top: 1.4mm;
+  overflow: hidden;
+  color: #000;
+  font-family: Calibri, Carlito, Arial, sans-serif;
+  font-size: var(--address-card-address-size, 8.5pt);
+  font-weight: 400;
+  line-height: var(--address-card-address-line-height, 10pt);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.address-card-metadata {
+  margin-top: 0.8mm;
+  overflow: hidden;
+  color: #475569;
+  font-size: var(--address-card-metadata-size, 7pt);
+  line-height: var(--address-card-metadata-line-height, 8pt);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.address-card-phone {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-top: 2mm;
+  color: #000;
+  font-family: Calibri, Carlito, Arial, sans-serif;
+  font-size: var(--address-card-phone-size, 9pt);
+  font-weight: 700;
+  line-height: var(--address-card-phone-line-height, 11pt);
+}
+
+.address-card-phone-icon {
+  width: 4mm;
+  height: 4mm;
+  flex: 0 0 4mm;
+  color: #c62828;
+  fill: #c62828;
+  stroke: #c62828;
+  stroke-width: 2.5;
+}
+
+.address-card-overflow-warning {
+  position: absolute;
+  bottom: 2mm;
+  right: 2mm;
+  z-index: 2;
+  border-radius: 999px;
+  background: #fff7ed;
+  color: #c2410c;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 6px;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .address-print-root,
+  .address-print-root * {
+    visibility: visible !important;
+  }
+
+  .address-preview-viewport {
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  .address-print-root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .a4-address-page {
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    break-after: page;
+    page-break-after: always;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .a4-address-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .address-print-card {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  .address-card-title,
+  .address-card-phone-icon {
+    color: #c62828 !important;
+  }
+}

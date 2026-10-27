@@ -1,0 +1,180 @@
+name: Firebase Hosting Live
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firebase-hosting-live
+  cancel-in-progress: true
+
+env:
+  FIREBASE_PROJECT_ID: sensiblebizpro
+  FIREBASE_SITE_ID: pro-crm
+  FIREBASE_TARGET: pro-crm
+  FIREBASE_TOOLS_VERSION: 15.23.0
+  PRODUCTION_URL: https://pro-crm.web.app
+  RELEASE_CHANNEL: production-candidate
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+
+      - name: Upload production artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: production-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRO_CRM }}
+        run: |
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/firebase-service-account.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase-service-account.json" >> "$GITHUB_ENV"
+
+      - name: Clean old CI release channels
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          channels_json="$(mktemp)"
+          npx --yes firebase-tools@${{ env.FIREBASE_TOOLS_VERSION }} hosting:channel:list \
+            --site "${{ env.FIREBASE_SITE_ID }}" \
+            --project "${{ env.FIREBASE_PROJECT_ID }}" \
+            --non-interactive \
+            --json > "$channels_json"
+
+          node -e '
+            const fs = require("fs");
+            const raw = fs.readFileSync(process.argv[1], "utf8");
+            const jsonStart = raw.indexOf("{");
+            if (jsonStart < 0) process.exit(0);
+            const payload = JSON.parse(raw.slice(jsonStart));
+            const channels = payload.result?.channels ?? payload.result ?? [];
+            const ids = channels
+              .map((channel) => {
+                if (typeof channel.channelId === "string") return channel.channelId;
+                if (typeof channel.name === "string") return channel.name.split("/").at(-1);
+                return "";
+              })
+              .filter((id) => /^release-\d+-\d+$/.test(id) || /^rollback-\d+-\d+$/.test(id));
+            process.stdout.write(ids.join("\n"));
+          ' "$channels_json" > "$RUNNER_TEMP/firebase-release-channels-to-delete.txt"
+
+          while IFS= read -r channel_id; do
+            test -n "$channel_id" || continue
+            echo "Deleting old Firebase Hosting channel: $channel_id"
+            npx --yes firebase-tools@${{ env.FIREBASE_TOOLS_VERSION }} hosting:channel:delete "$channel_id" \
+              --site "${{ env.FIREBASE_SITE_ID }}" \
+              --project "${{ env.FIREBASE_PROJECT_ID }}" \
+              --force \
+              --non-interactive
+          done < "$RUNNER_TEMP/firebase-release-channels-to-delete.txt"
+
+      - name: Deploy release channel
+        id: deploy_release
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          npx --yes firebase-tools@${{ env.FIREBASE_TOOLS_VERSION }} hosting:channel:deploy "${{ env.RELEASE_CHANNEL }}" \
+            --only "${{ env.FIREBASE_TARGET }}" \
+            --project "${{ env.FIREBASE_PROJECT_ID }}" \
+            --expires 7d \
+            --non-interactive \
+            --json
+
+          open_json="$(mktemp)"
+          npx --yes firebase-tools@${{ env.FIREBASE_TOOLS_VERSION }} hosting:channel:open "${{ env.RELEASE_CHANNEL }}" \
+            --site "${{ env.FIREBASE_SITE_ID }}" \
+            --project "${{ env.FIREBASE_PROJECT_ID }}" \
+            --non-interactive \
+            --json | tee "$open_json"
+
+          release_url="$(node -e '
+            const fs = require("fs");
+            const raw = fs.readFileSync(process.argv[1], "utf8");
+            const jsonStart = raw.indexOf("{");
+            if (jsonStart < 0) process.exit(1);
+            const data = JSON.parse(raw.slice(jsonStart));
+            const url = data.result?.url || "";
+            if (!url) process.exit(1);
+            process.stdout.write(url);
+          ' "$open_json")"
+
+          echo "release_url=$release_url" >> "$GITHUB_OUTPUT"
+          echo "Release URL: $release_url"
+
+      - name: Smoke test release channel
+        env:
+          RELEASE_URL: ${{ steps.deploy_release.outputs.release_url }}
+        run: |
+          test -n "$RELEASE_URL"
+          curl --fail --location --retry 30 --retry-delay 10 --retry-max-time 300 --retry-all-errors --connect-timeout 10 --max-time 30 --silent --show-error "$RELEASE_URL/index.html"
+
+  deploy_live:
+    needs: build_and_release
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://pro-crm.web.app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Download production artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: production-dist
+          path: dist
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRO_CRM }}
+        run: |
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/firebase-service-account.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase-service-account.json" >> "$GITHUB_ENV"
+
+      - name: Promote tested release channel to live
+        run: npx --yes firebase-tools@${{ env.FIREBASE_TOOLS_VERSION }} hosting:clone ${{ env.FIREBASE_SITE_ID }}:${{ env.RELEASE_CHANNEL }} ${{ env.FIREBASE_SITE_ID }}:live --project ${{ env.FIREBASE_PROJECT_ID }} --non-interactive
+
+      - name: Smoke test production
+        id: smoke_production
+        run: curl --fail --location --retry 30 --retry-delay 10 --retry-max-time 300 --retry-all-errors --connect-timeout 10 --max-time 30 --silent --show-error "${{ env.PRODUCTION_URL }}/"

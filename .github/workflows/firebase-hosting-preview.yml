@@ -1,0 +1,71 @@
+name: Firebase Hosting Preview
+
+on:
+  pull_request:
+    branches:
+      - warehouse-branch
+
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: firebase-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  FIREBASE_PROJECT_ID: sensiblebizpro
+  FIREBASE_TARGET: pro-crm
+  FIREBASE_TOOLS_VERSION: 15.23.0
+
+jobs:
+  build_and_preview:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+
+      - name: Deploy preview
+        id: deploy_preview
+        uses: FirebaseExtended/action-hosting-deploy@7c850a480ce753f4f06f010801fc5a43787740bb # v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRO_CRM }}
+          projectId: ${{ env.FIREBASE_PROJECT_ID }}
+          target: ${{ env.FIREBASE_TARGET }}
+          expires: 7d
+          firebaseToolsVersion: ${{ env.FIREBASE_TOOLS_VERSION }}
+
+      - name: Smoke test preview
+        env:
+          PREVIEW_URL: ${{ steps.deploy_preview.outputs.details_url }}
+        run: |
+          test -n "$PREVIEW_URL"
+          curl --fail --location --retry 30 --retry-delay 10 --retry-max-time 300 --retry-all-errors --connect-timeout 10 --max-time 30 --silent --show-error "$PREVIEW_URL/"

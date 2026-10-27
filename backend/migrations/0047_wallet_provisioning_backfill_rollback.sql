@@ -1,0 +1,3 @@
+-- Intentionally irreversible.
+-- Wallets are financial/audit records and must never be deleted by rollback.
+-- Application code remains compatible with pre-existing wallet rows.

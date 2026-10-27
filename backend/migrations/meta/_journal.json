@@ -1,0 +1,349 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789100000000,
+      "tag": "0001_phase_4_1_foundation",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789600000000,
+      "tag": "0002_phase_b1_customers",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790100000000,
+      "tag": "0003_phase_b2_leads",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790600000000,
+      "tag": "0004_phase_b3_activities",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791100000000,
+      "tag": "0005_phase_b4_team_tree_users",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791600000000,
+      "tag": "0006_phase_b5_products_warehouses",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792100000000,
+      "tag": "0007_phase_b6_calls",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1792600000000,
+      "tag": "0008_phase_b7_attendance_leave",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793100000000,
+      "tag": "0009_phase_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793600000000,
+      "tag": "0010_phase_b7_closeout",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1794100000000,
+      "tag": "0011_phase_b7_application_grants",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1794600000000,
+      "tag": "0012_phase_b7_catalog_rls_grants",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1795100000000,
+      "tag": "0013_phase_b8_payroll",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1795600000000,
+      "tag": "0014_phase_b9_expense_budget",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1796100000000,
+      "tag": "0015_phase_b10_access_control_admin",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1796600000000,
+      "tag": "0016_phase_1_extension_convergence",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1797100000000,
+      "tag": "0017_qr_sessions",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1797600000000,
+      "tag": "0018_employee_sales_targets",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1798100000000,
+      "tag": "0019_call_table_grants",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1798600000000,
+      "tag": "0020_outlet_onboarding_plans",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1799100000000,
+      "tag": "0021_user_tracking",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1799600000000,
+      "tag": "0022_ai_contact_jobs",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1800100000000,
+      "tag": "0023_generated_contact_uploads",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1800600000000,
+      "tag": "0024_payroll_table_grants",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1801100000000,
+      "tag": "0025_whatsapp_postgres",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1801600000000,
+      "tag": "0026_enable_whatsapp_feature",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1802100000000,
+      "tag": "0027_reference_geography",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1802600000000,
+      "tag": "0028_task_management",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1803100000000,
+      "tag": "0029_enable_team_tree_for_outlet",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1803600000000,
+      "tag": "0030_grant_team_tree_to_outlet_admin",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1804100000000,
+      "tag": "0031_postgres_runtime_cutover",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1804600000000,
+      "tag": "0032_business_configuration_and_dynamic_stages",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1805100000000,
+      "tag": "0033_quotations",
+      "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1805600000000,
+      "tag": "0034_complete_dynamic_pipeline",
+      "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1806100000000,
+      "tag": "0035_employee_sales_targets_unique",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1806600000000,
+      "tag": "0036_pgvector_leads_embedding",
+      "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1807100000000,
+      "tag": "0037_rls_strengthen_outlet_policies",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1807600000000,
+      "tag": "0038_query_performance_indexes",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1808100000000,
+      "tag": "0039_search_fts_foundation",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1808600000000,
+      "tag": "0040_timeline_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1809100000000,
+      "tag": "0041_ai_retrieval_index",
+      "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1809600000000,
+      "tag": "0042_ai_customer_dossiers",
+      "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1810100000000,
+      "tag": "0043_ai_agent_actions",
+      "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1810600000000,
+      "tag": "0044_billing_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 44,
+      "version": "7",
+      "when": 1811100000000,
+      "tag": "0045_rate_card_admin",
+      "breakpoints": true
+    },
+    {
+      "idx": 45,
+      "version": "7",
+      "when": 1811200000000,
+      "tag": "0046_platform_admin_rls",
+      "breakpoints": true
+    },
+    {
+      "idx": 46,
+      "version": "7",
+      "when": 1811300000000,
+      "tag": "0047_wallet_provisioning_backfill",
+      "breakpoints": true
+    },
+    {
+      "idx": 47,
+      "version": "7",
+      "when": 1811400000000,
+      "tag": "0048_reconcile_retry_tracking",
+      "breakpoints": true
+    },
+    {
+      "idx": 48,
+      "version": "7",
+      "when": 1811500000000,
+      "tag": "0049_accounts_and_exports_suite",
+      "breakpoints": true
+    }
+  ]
+}

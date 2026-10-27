@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { requirePostgresAuth,withRequestDatabaseContext } from "../../middleware/postgresAuth.js";
+import { validateRequest } from "../../middleware/validateRequest.js";
+import { POSTGRES_SESSION_HEADER } from "../auth/auth.cookie.js";
+import { generatedContactImportListSchema,generatedContactImportParamsSchema,generatedContactImportSchema,generatedContactReassignParamsSchema,generatedContactReassignSchema } from "../../validators/generatedContact.validator.js";
+import { create,details,list,reassign,remove } from "./postgresGeneratedContact.controller.js";
+export const postgresGeneratedContactRouter=Router();
+postgresGeneratedContactRouter.use((request,_response,next)=>request.header(POSTGRES_SESSION_HEADER)==="1"?next():next("router"));
+postgresGeneratedContactRouter.use(requirePostgresAuth);
+postgresGeneratedContactRouter.get("/imports",validateRequest({query:generatedContactImportListSchema}),withRequestDatabaseContext(list));
+postgresGeneratedContactRouter.post("/import",validateRequest({body:generatedContactImportSchema}),withRequestDatabaseContext(create));
+postgresGeneratedContactRouter.get("/imports/:importId/contacts",validateRequest({params:generatedContactImportParamsSchema,query:generatedContactImportListSchema}),withRequestDatabaseContext(details));
+postgresGeneratedContactRouter.patch("/contacts/:contactId/assignee",validateRequest({params:generatedContactReassignParamsSchema,body:generatedContactReassignSchema}),withRequestDatabaseContext(reassign));
+postgresGeneratedContactRouter.delete("/contacts/:contactId",validateRequest({params:generatedContactReassignParamsSchema,query:generatedContactImportListSchema}),withRequestDatabaseContext(remove));

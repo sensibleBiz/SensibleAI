@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { requirePostgresAuth, withRequestDatabaseContext } from "../../middleware/postgresAuth.js";
+import { validateRequest } from "../../middleware/validateRequest.js";
+import { createPublicLink, createQuickContact, deletePublicLink, listPublicLinks } from "./postgresPublicLink.controller.js";
+import { publicLinkBodySchema, publicLinkDeleteSchema, publicLinkQuerySchema, quickContactBodySchema } from "./postgresPublicLink.validator.js";
+export const postgresPublicLinkRouter=Router();
+postgresPublicLinkRouter.use(requirePostgresAuth);
+postgresPublicLinkRouter.post("/quick-contacts",validateRequest({body:quickContactBodySchema}),createQuickContact);
+postgresPublicLinkRouter.get("/public-links",validateRequest({query:publicLinkQuerySchema}),withRequestDatabaseContext(listPublicLinks));
+postgresPublicLinkRouter.post("/public-links",validateRequest({body:publicLinkBodySchema}),withRequestDatabaseContext(createPublicLink));
+postgresPublicLinkRouter.delete("/public-links/:linkId",validateRequest({params:publicLinkDeleteSchema,query:publicLinkQuerySchema}),withRequestDatabaseContext(deletePublicLink));

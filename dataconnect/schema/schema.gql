@@ -1,0 +1,36 @@
+type Customer
+  @table(name: "customers")
+  @unique(fields: ["tenantId", "customerCode"])
+  @index(fields: ["tenantId", "status"]) {
+  id: UUID! @default(expr: "uuidV4()")
+
+  tenantId: UUID! @index
+  businessId: UUID!
+
+  customerCode: String! @col(dataType: "varchar(64)")
+  customerName: String!
+  normalizedCustomerName: String!
+
+  businessName: String! @default(value: "")
+  mobile: String @col(dataType: "varchar(32)")
+  normalizedMobile: String @col(dataType: "varchar(32)")
+  email: String @col(dataType: "varchar(320)")
+  normalizedEmail: String @col(dataType: "varchar(320)")
+
+  area: String! @default(value: "")
+  city: String! @default(value: "")
+  state: String! @default(value: "")
+
+  status: String! @default(value: "ACTIVE")
+  lifecycle: String! @default(value: "PROSPECT")
+
+  totalEnquiries: Int! @default(value: 0)
+  totalWon: Int! @default(value: 0)
+  totalLost: Int! @default(value: 0)
+
+  createdBy: UUID!
+  updatedBy: UUID!
+
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}

@@ -1,0 +1,9 @@
+import type { Request,Response } from "express";
+import type { GeneratedContactImportInput,GeneratedContactReassignInput } from "../../types/generatedContact.types.js";
+import { postgresGeneratedContactService as service } from "./postgresGeneratedContact.service.js";
+const ctx=(request:Request)=>({db:request.database!,auth:request.postgresAuth!});
+export const list=async(request:Request,response:Response)=>{const {db,auth}=ctx(request);const query=request.validated?.query as {outletId:string;month?:string};response.json({success:true,data:await service.list(db,auth.tenantId,auth.userId,query.outletId,query.month)});};
+export const create=async(request:Request,response:Response)=>{const {db,auth}=ctx(request);response.status(201).json({success:true,data:await service.create(db,auth.tenantId,auth.userId,request.validated?.body as GeneratedContactImportInput)});};
+export const details=async(request:Request,response:Response)=>{const {db,auth}=ctx(request);const query=request.validated?.query as {outletId:string};const params=request.validated?.params as {importId:string};response.json({success:true,data:await service.details(db,auth.tenantId,auth.userId,query.outletId,params.importId)});};
+export const reassign=async(request:Request,response:Response)=>{const {db,auth}=ctx(request);const params=request.validated?.params as {contactId:string};const body=request.validated?.body as Omit<GeneratedContactReassignInput,"contactId">;response.json({success:true,data:await service.reassign(db,auth.tenantId,auth.userId,{...body,contactId:params.contactId})});};
+export const remove=async(request:Request,response:Response)=>{const {db,auth}=ctx(request);const params=request.validated?.params as {contactId:string};const query=request.validated?.query as {outletId:string};response.json({success:true,data:await service.delete(db,auth.tenantId,auth.userId,query.outletId,params.contactId)});};

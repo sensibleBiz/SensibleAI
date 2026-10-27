@@ -1,0 +1,113 @@
+.export-import-workspace .export-workspace-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+}
+
+.export-import-workspace .export-module-nav {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.export-import-workspace .export-module-button {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  padding: 0 11px;
+  color: #64748b;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: 700 0.72rem -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.export-import-workspace .export-module-button:hover {
+  color: #2563eb;
+  background: #f8fafc;
+}
+
+.export-import-workspace .export-module-button.active {
+  color: #2563eb;
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+.export-import-workspace .export-currency-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding: 3px;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.68rem;
+}
+
+.export-import-workspace .export-currency-switch > span {
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+.export-import-workspace .export-currency-switch button {
+  min-height: 28px;
+  padding: 0 8px;
+  color: #64748b;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font: 750 0.68rem -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+
+.export-import-workspace .export-currency-switch button.active {
+  color: #2563eb;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+
+.export-import-workspace .export-preview-notice {
+  margin-bottom: 12px;
+  padding: 9px 12px;
+  color: #475569;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 9px;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.export-import-workspace .export-workspace-content {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .export-import-workspace .export-workspace-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .export-import-workspace .export-currency-switch {
+    width: fit-content;
+  }
+}

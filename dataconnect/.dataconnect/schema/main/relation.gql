@@ -1,0 +1,315 @@
+extend type Customer {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "Customer", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `Customer` table.
+  """
+  _count: Int! @fdc_generated(from: "Customer.", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `area` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  area_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.area", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `businessId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  businessId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.businessId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `businessName` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  businessName_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.businessName", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `city` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  city_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.city", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `createdAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  createdAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.createdAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `createdBy` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  createdBy_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.createdBy", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `customerCode` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  customerCode_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.customerCode", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `customerName` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  customerName_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.customerName", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `email` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  email_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.email", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `lifecycle` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  lifecycle_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.lifecycle", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `mobile` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  mobile_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.mobile", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `normalizedCustomerName` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  normalizedCustomerName_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.normalizedCustomerName", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `normalizedEmail` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  normalizedEmail_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.normalizedEmail", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `normalizedMobile` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  normalizedMobile_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.normalizedMobile", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `state` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  state_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.state", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `status` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  status_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.status", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `tenantId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  tenantId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.tenantId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `totalEnquiries` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  totalEnquiries_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.totalEnquiries", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `totalLost` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  totalLost_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.totalLost", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `totalWon` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  totalWon_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.totalWon", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `updatedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  updatedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.updatedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Customer` table where the `updatedBy` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  updatedBy_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Customer.updatedBy", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `totalEnquiries` field in the `Customer` table.
+  """
+  totalEnquiries_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "Customer.totalEnquiries", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `totalLost` field in the `Customer` table.
+  """
+  totalLost_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "Customer.totalLost", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `totalWon` field in the `Customer` table.
+  """
+  totalWon_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "Customer.totalWon", purpose: QUERY_SUM)
+  """
+  ✨ Average the `totalEnquiries` field in the `Customer` table.
+  """
+  totalEnquiries_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Customer.totalEnquiries", purpose: QUERY_AVG)
+  """
+  ✨ Average the `totalLost` field in the `Customer` table.
+  """
+  totalLost_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Customer.totalLost", purpose: QUERY_AVG)
+  """
+  ✨ Average the `totalWon` field in the `Customer` table.
+  """
+  totalWon_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Customer.totalWon", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `createdAt` field in the `Customer` table.
+  """
+  createdAt_min: Timestamp @fdc_generated(from: "Customer.createdAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `totalEnquiries` field in the `Customer` table.
+  """
+  totalEnquiries_min: Int @fdc_generated(from: "Customer.totalEnquiries", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `totalLost` field in the `Customer` table.
+  """
+  totalLost_min: Int @fdc_generated(from: "Customer.totalLost", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `totalWon` field in the `Customer` table.
+  """
+  totalWon_min: Int @fdc_generated(from: "Customer.totalWon", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `updatedAt` field in the `Customer` table.
+  """
+  updatedAt_min: Timestamp @fdc_generated(from: "Customer.updatedAt", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `createdAt` field in the `Customer` table.
+  """
+  createdAt_max: Timestamp @fdc_generated(from: "Customer.createdAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `totalEnquiries` field in the `Customer` table.
+  """
+  totalEnquiries_max: Int @fdc_generated(from: "Customer.totalEnquiries", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `totalLost` field in the `Customer` table.
+  """
+  totalLost_max: Int @fdc_generated(from: "Customer.totalLost", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `totalWon` field in the `Customer` table.
+  """
+  totalWon_max: Int @fdc_generated(from: "Customer.totalWon", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `updatedAt` field in the `Customer` table.
+  """
+  updatedAt_max: Timestamp @fdc_generated(from: "Customer.updatedAt", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "Customer.id", purpose: ENTITY_ID)
+}

@@ -1,0 +1,14 @@
+specVersion: "v1"
+serviceId: "sensiblecrm-service"
+location: "asia-south1"
+
+schemas:
+  - source: "./schema"
+    datasource:
+      postgresql:
+        database: "sensible-database"
+        cloudSql:
+          instanceId: "sensible-sql-instance"
+
+connectorDirs:
+  - "./example"
